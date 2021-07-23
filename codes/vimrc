@@ -1,0 +1,28 @@
+set nu              "显示行号
+set ai              "自动缩进
+set cindent         "C语言自动缩进
+set ts=4            "tab宽度为4
+set sw=4            "缩进宽度为4
+
+imap {}<CR> {<CR><SPACE><CR>}<UP><END><BACKSPACE>   "映射, 方便写(个人习惯)
+
+"设置编译运行的命令快捷键
+map <F5> :call Compile()<CR>
+map <F6> :call Run()<CR>
+map <F7> :call CompileRun()<CR>
+
+func! Compile()
+    silent w
+    silent !clear
+    exe "!g++ % -o %< -std=c++11 -Wall -DNGCS -g"
+endfunc
+
+func! Run()
+    silent !clear
+    exe "!time ./%<"
+endfunc
+
+func! CompileRun()
+    exe Compile()
+    exe Run()
+endfunc

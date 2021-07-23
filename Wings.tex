@@ -1,0 +1,269 @@
+\documentclass[utf8]{ctexart}
+\usepackage[cache=false]{minted}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{sourcecodepro}
+
+\newcommand{\cpp}[1]{\inputminted[linenos,breaklines,tabsize=4,mathescape]{c++}{#1}}
+\geometry{a4paper,left=25mm,right=2cm,top=2cm,bottom=1cm}	% 调整页边距, 打印用
+\usemintedstyle{bw}		% 设置minted的高亮风格
+
+\begin{document}
+\setcounter{section}{-1}	% section 从0开始标号
+\title{\bf\Huge{常\ 用\ 算\ 法\ 模\ 板}}
+\author{Wings}
+\date{\today}
+
+% 这里搞封面
+\begin{titlepage}
+\newgeometry{}				% 封面页边距不用调
+\maketitle
+\thispagestyle{empty}		% 封面无页数
+\end{titlepage}
+\newpage
+
+\linespread{1} \selectfont 	% 设置行距
+
+% 目录
+\setcounter{page}{1}
+\pagenumbering{Roman}
+\tableofcontents
+\newpage
+
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\section{说明}
+
+\subsection{约定}
+
+\begin{itemize}
+\setlength{\itemsep}{-5pt}	%设置item间距
+\item \mintinline{c++}{const int MAXN} 为最大数据长度
+\item \mintinline{c++}{const int MAXV} 为(抽象)图最大点数
+\item \mintinline{c++}{const int MAXM} 为第二维数据最大长度或(抽象)图最大边数
+\item \mintinline{c++}{const int MAXQ} 为最大询问
+\item \mintinline{c++}{#ifdef GDB} 表示GDB调试, 从文件读取数据等
+\item \mintinline{c++}{#ifdef NGCS} 表示输出中间变量调试 (NGCS = Nothing Gold Can Stay)
+\item 若无特殊情况, 数组从下标1开始存储数据
+\item 图论带边权一般以邻接表建图; 否则用向量存邻接点
+\item 网络流邻接表边从下标0开始, 因为要建反边; 否则从1开始
+\item[]
+\item 为节省篇幅, 代码进行部分压行
+\end{itemize}
+
+\subsection{模板头}
+\cpp{codes/head.cpp}
+
+\newpage
+
+\section{数据结构}
+
+\subsection{并查集}
+
+\subsubsection{基本操作}
+\cpp{codes/data-struct/ufs.cpp}
+
+\subsubsection{带边权}
+\cpp{codes/data-struct/ufs-with-edge-weight.cpp}
+
+\subsection{树状数组}
+\cpp{codes/data-struct/bit.cpp}
+
+\subsection{线段树}
+
+\subsubsection{区间修改\&区间查询}
+\cpp{codes/data-struct/segment-tree.cpp}
+
+\subsubsection{动态开点}
+\cpp{codes/data-struct/dynamic-segment-tree.cpp}
+
+\subsection{ST表}
+\cpp{codes/data-struct/st.cpp}
+
+\subsection[主席树]{主席树(静态区间k小)}
+\cpp{codes/data-struct/hjt-tree.cpp}
+
+% \subsection{左偏树(可并堆)}
+% \cpp{codes/data-struct/leftist-heap.cpp}
+
+\subsection[FHQTreap]{FHQTreap(带区间翻转标记)}
+\cpp{codes/data-struct/fhq-treap.cpp}
+
+% \subsection[Splay]{Splay(还没学会, 先拉个板子, 翻转标记写挂了)}
+% \cpp{codes/data-struct/splay.cpp}
+
+\section{动态规划}
+
+\subsection{背包}
+
+\subsubsection[01背包]{01背包\ 滚动数组 \& 输出方案}
+\cpp{codes/dp/01-pack.cpp}
+
+\subsubsection{完全背包}
+\cpp{codes/dp/complete-pack.cpp}
+
+\subsubsection{分组背包}
+\cpp{codes/dp/group-pack.cpp}
+
+% \subsubsection{多重背包}
+% \cpp{codes/dp/multi-pack.cpp}
+
+\subsection{最长公共子序列}
+\cpp{codes/dp/lcm.cpp}
+
+\subsection{优化}
+
+% \subsubsection{四边形不等式}
+% \cpp{codes/dp/quadrilateral.cpp}
+
+% \subsubsection{斜率优化}
+
+% 我们要把转移方程化成$y = kx + b$的形式, 并且
+
+% \begin{itemize}
+% \setlength{\itemsep}{-5pt}	%设置item间距
+% \item $y$ 是含有$dp[j]$的关于$j$的式子
+% \item $kx$ 是同时含有$i, j$的式子$p\cdot f(i)g(j)$
+% \item 其中 $k$ 为与$i$有关的元和其系数, $pf(i)$
+% \item 而 $x$ 是$g(j)$
+% \item $b$ 是含有$dp[i]$的关于$i$的式子
+% \end{itemize}
+
+% 根据"线性规划"思想,把点对$(x, y)$在坐标系中表示,然后将一条斜率为$k$的直线平移并且过一个点,使得$b$取得最值.那么这个使$b$取得最值的点即为最优决策,让$dp$从这里转移即可.
+
+% x具有单调性的话, 可以用单调队列来维护凸包; k有单调性的话, 可以用双端队列来直接获得队头为最优决策点; k不具有单调性, 需要二分找最优决策点; x不具有单调性, 需要平衡树维护凸包;
+
+% 只写过x和k都有单调性的, 抄个以前的代码.
+
+% APIO特别行动队:给出长度为$n$的正整数数列$x$, 整数$a,b,c$, 把$x$分成若干段, 设该段的数和为$s$, 每一段的价值为$as^2 + bs + c$, 求最大价值.
+
+% 设$s_i$为$x$的前缀和, 那么方程可以写成:
+% $dp[i] = max\{dp[j] + a\cdot (s_i - s_j)^2 + b\cdot (s_i - s_j) + c\}$. 去掉$max$化简为$(dp[j] + as_j^2 - bs_j + c) = (2as_i)(s_j) + (dp[i] - as_i^2 - bs_i)$(括号是为了方便对应直线式)
+
+% 最大化b, 维护下凸包. $x(s_j)$ 单调增, 单调队列维护下凸包. $k(2as_i)$单调减(注意$a<0$), 双端队列维护下凸包.
+
+% \cpp{codes/dp/apio.cpp}
+
+\subsubsection{决策单调性}
+\cpp{codes/dp/decision-monotonicity.cpp}
+
+% \subsection*{插头DP}
+% TODO
+
+\section{树相关}
+
+\subsection{点分治}
+
+\cpp{codes/tree/centroid-decomposition.cpp}
+
+% \subsection[虚树]{虚树(忘了, 抄了以前的代码)}
+% TODO
+
+% SDOI消耗战:给出一棵n个点的树, 带边权, m次询问, 每次问k个点, 把他们与1断开(割掉边)需要的最小权.
+% \cpp{codes/tree/virtual-tree.cpp}
+
+\section{图论}
+
+\subsection{Dinic}
+\cpp{codes/graph/dinic.cpp}
+
+\subsection[费用流]{费用流EK算法}
+\cpp{codes/graph/ek-mcmf.cpp}
+
+% \section{数论}
+
+% \subsection{欧几里得}
+
+% \subsection{拓展欧几里得}
+
+% \subsection{质因数分解}
+
+% \subsection{筛素数}
+
+% \section{组合数学}
+
+\section{计算几何}
+
+\subsection[误差修正]{误差修正(eps和sgn函数)}
+\cpp{codes/computational-geometry/sgn.cpp}
+
+\subsection{向量和点}
+\cpp{codes/computational-geometry/vec.cpp}
+
+\subsection{直线和线段}
+\cpp{codes/computational-geometry/line.cpp}
+
+\subsection{多边形}
+\cpp{codes/computational-geometry/polygon.cpp}
+
+\subsection{圆}
+\cpp{codes/computational-geometry/circle.cpp}
+
+% \subsection[最小圆覆盖]{最小圆覆盖(抄的代码)}
+% \cpp{codes/computational-geometry/min-circle-cover.cpp}
+
+% \section{字符串}
+
+% \subsection{Tire}
+% \cpp{codes/string/tire.cpp}
+
+\section{杂项}
+
+\subsection{最长单调子序列}
+\cpp{codes/misc/lis.cpp}
+
+\subsection{莫队}
+
+\subsubsection{普通莫队}
+\cpp{codes/misc/mo.cpp}
+
+\subsubsection{带修莫队}
+\cpp{codes/misc/modifiable-mo.cpp}
+
+\subsubsection{回滚莫队}
+\cpp{codes/misc/rollback-mo.cpp}
+
+\newpage
+
+\section{附录}
+
+\subsection{Vim配置}
+
+新建文件 $\sim$/.vimrc
+
+\inputminted[linenos,breaklines,tabsize=4,mathescape,texcl]{c}{codes/vimrc}
+
+\subsection{Vim录制宏}
+
+录制: 在 normal 模式下按q, 然后再按a-z中的某个字符(小写, 代表覆盖. 大写代表追加). 在normal模式下按q结束录制.
+
+输入: 在 normal 模式下按下@, 再按下a-z中的某个字符, 输入对应字符保存的宏.
+
+\subsection{GDB命令}
+
+\begin{tabular}{ |l|l| }
+	\hline
+	\bfseries{功能}		& \bfseries{命令}		\\
+	\hline
+	设置断点				& b 行号/函数名			\\
+	当条件满足时断点		& b 行号/函数名 if 条件	\\
+	打印变量/表达式的值	& p 变量名/表达式			\\
+	持续显示变量/表达式值	& disp 变量名/表达式		\\
+	单步运行				& n						\\
+	单步进入				& s						\\
+	继续(下一个断点)		& c						\\
+	退出					& q						\\
+	(重新)运行			& r 					\\
+	\hline
+\end{tabular}
+
+\subsection{对拍}
+
+\subsubsection{Windows}
+\inputminted[linenos,breaklines,tabsize=4,mathescape,texcl]{bat}{codes/windows-check.bat}
+
+\subsubsection{Linux}
+\inputminted[linenos,breaklines,tabsize=4,mathescape,texcl]{sh}{codes/linux-check.sh}
+
+\end{document}
