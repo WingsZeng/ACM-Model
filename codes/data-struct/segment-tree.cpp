@@ -3,9 +3,6 @@ struct Node {			// 线段节点
 	LL val, tag;		// val为线段和的值, tag为标记值
 } t[MAXN << 2]; // 线段节点要开4倍数据点的大小
 int n;
-void init(int _n, LL data[]) {
-	build(data, 1, _n, 1);
-}
 /* 更新一条完整的线段 */
 void updateNode(int u, LL d) {
 	t[u].val += d * t[u].len;
@@ -30,6 +27,10 @@ void build(LL data[], int l, int r, int u) {
 		build(data, t[u].mid+1, t[u].r, RCH(u));
 		pushUp(u);
 	}
+}
+/* 初始化一棵线段树 */
+void init(int _n, LL data[]) {
+	build(data, 1, _n, 1);
 }
 /* 区间修改 */
 void update(int l, int r, LL d, int u = 1) {

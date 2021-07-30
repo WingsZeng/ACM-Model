@@ -33,5 +33,9 @@ int main() {
 	freopen("X.in", "r", stdin);
 	freopen("X.out", "w", stdout);
 #endif
+	scanf("%d", &T);
+	while (T--) {
+		scanf("%d", &n);
+	}
 	return 0;
 }

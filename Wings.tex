@@ -171,6 +171,32 @@
 \subsection[费用流]{费用流EK算法}
 \cpp{codes/graph/ek-mcmf.cpp}
 
+\section{数学}
+
+\subsection{取模函数}
+\cpp{codes/math/mod.cpp}
+
+\subsection{快速幂}
+\cpp{codes/math/power.cpp}
+
+% \subsection{快速组合数}
+
+\subsection{多项式}
+
+\subsubsection{拉格朗日插值}
+
+$$L(x) = \sum_{i=0}^{n-1} y_i \ell_i(x)$$
+$$\ell_i(x) = \prod_{j=0,j\ne i}^{n-1} \frac{(x - x_j)}{(x_i - x_j)} = \frac{(x - x_0) \cdots (x - x_{i-1})(x - x_{i+1}) \cdots (x - x_{n-1})}{(x_i - x_0) \cdots (x_i - x_{i-1})(x_i - x_{i+1}) \cdots (x_i - x_{n-1})}$$
+$$L(x) = \sum_{i=0}^{n-1} y_i \frac{\prod \limits_{j \ne i} (x - x_j)}{\prod \limits_{j \ne i} (x_i - x_j)}$$
+
+\cpp{codes/math/polynomial/lagrange.cpp}
+
+\subsubsection{横坐标连续拉格朗日插值}
+$$pre_i(\xi) = \prod_{j=0}^i (\xi - x_j), suf_i(\xi) = \prod_{j=i}^{n-1} (\xi - x_j)$$
+$$\ell_i(x) = \frac{pre_{i-1}(x) \cdot suf_{i+1}(x)}{(-1)^{n-1-i}(x_i - x_0)! (x_{n-1} - x_i)!}$$
+
+\cpp{codes/math/polynomial/lagrange-consecutive.cpp}
+
 % \section{数论}
 
 % \subsection{欧几里得}
