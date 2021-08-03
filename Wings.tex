@@ -3,6 +3,7 @@
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{sourcecodepro}
+\usepackage{setspace}
 
 \newcommand{\cpp}[1]{\inputminted[linenos,breaklines,tabsize=4,mathescape]{c++}{#1}}
 \geometry{a4paper,left=25mm,right=2cm,top=2cm,bottom=1cm}	% 调整页边距, 打印用
@@ -299,5 +300,22 @@ $$L(x) = \frac{\sum_{i=0}^{n-1}\frac{w_i}{x-x_i}y_i}{\sum_{i=0}^{n-1}\frac{w_i}{
 
 \subsubsection{Linux}
 \inputminted[linenos,breaklines,tabsize=4,mathescape,texcl]{sh}{codes/linux-check.sh}
+
+\subsection{数学公式}
+
+\subsubsection{几何}
+
+\begin{spacing}{2}
+\begin{center}
+\begin{tabular}{ |c|c| }
+	\hline
+	缺球体积				& $V = \pi H^2\left(R-\frac{H}{3}\right)$		\\
+	\hline
+	两圆相交弓型高度/		& $h_1 = r_1 - \frac{r_1^2 - r_2^2 + d^2}{2d}$	\\
+	两球相交缺球高度		& $h_2 = r_2 - \frac{r_2^2 - r_1^2 + d^2}{2d}$	\\
+	\hline
+\end{tabular}
+\end{center}
+\end{spacing}
 
 \end{document}
