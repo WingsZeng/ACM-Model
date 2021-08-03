@@ -192,10 +192,18 @@ $$L(x) = \sum_{i=0}^{n-1} y_i \frac{\prod \limits_{j \ne i} (x - x_j)}{\prod \li
 \cpp{codes/math/polynomial/lagrange.cpp}
 
 \subsubsection{横坐标连续拉格朗日插值}
+
 $$pre_i(\xi) = \prod_{j=0}^i (\xi - x_j), suf_i(\xi) = \prod_{j=i}^{n-1} (\xi - x_j)$$
 $$\ell_i(x) = \frac{pre_{i-1}(x) \cdot suf_{i+1}(x)}{(-1)^{n-1-i}(x_i - x_0)! (x_{n-1} - x_i)!}$$
 
 \cpp{codes/math/polynomial/lagrange-consecutive.cpp}
+
+\subsubsection{重心拉格朗日插值(增删点)}
+
+$$w_i = \frac{1}{\prod_{j \ne i}(x_i - x_j)}$$
+$$L(x) = \frac{\sum_{i=0}^{n-1}\frac{w_i}{x-x_i}y_i}{\sum_{i=0}^{n-1}\frac{w_i}{x-x_i}}$$
+
+\cpp{codes/math/polynomial/lagrange-weight.cpp}
 
 % \section{数论}
 
