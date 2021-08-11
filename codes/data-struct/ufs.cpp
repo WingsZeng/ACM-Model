@@ -1,7 +1,7 @@
 // 可以维护其他数据, 如集合大小, 集合最值. 注意仅代表元的值有效
 int n, fa[MAXN];
 /* 初始化并查集 */
-void init() {
+void init(int n) {
 	for (int i = 1; i <= n; i++) fa[i] = i;
 }
 /* 查询并返回x所在集合的代表元; 路径压缩 */
