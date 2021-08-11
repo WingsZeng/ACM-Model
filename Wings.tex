@@ -4,6 +4,14 @@
 \usepackage{graphicx}
 \usepackage{sourcecodepro}
 \usepackage{setspace}
+\usepackage{hyperref}
+
+\hypersetup{hidelinks,
+	colorlinks=true,
+	allcolors=black,
+	pdfstartview=Fit,
+	breaklinks=true
+}
 
 \newcommand{\cpp}[1]{\inputminted[linenos,breaklines,tabsize=4,mathescape]{c++}{#1}}
 \geometry{a4paper,left=25mm,right=2cm,top=2cm,bottom=1cm}	% 调整页边距, 打印用
