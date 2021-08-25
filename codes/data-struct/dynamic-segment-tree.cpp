@@ -60,3 +60,30 @@ LL query(int l, int r, int u = -1) {
 	else return query(l, t[u].mid, t[u].lch) +
 				query(t[u].mid+1, r, t[u].rch);
 }
+
+/* 新建一棵线段树为 x, y 两棵线段树的合并, 返回合并后的节点标号 */
+int merge(int x, int y, int l, int r) {
+	if (!x || !y) return x | y;
+	int rt = newNode(l, r);
+	if (l == r) {	// 按需合并
+		t[rt].val = t[x].val + t[y].val, t[rt].tag = t[x].tag + t[y].tag;
+		return rt;
+	}
+	t[rt].lch = merge(t[x].lch, t[y].lch, l, t[rt].mid);
+	t[rt].rch = merge(t[x].rch, t[y].rch, t[rt].mid+1, r);
+	pushUp(rt);
+	return rt;
+}
+
+/* 将 y 合并到 x 上, 返回合并后的节点标号(即 x) */
+int merge(int x, int y, int l, int r) {
+	if (!x || !y) return x || y;
+	if (l == r) {
+		t[x].val += t[y].val, t[x].tag += t[y].tag;
+		return x;
+	}
+	t[x].lch = merge(t[x].lch, t[y].lch, l, t[x].mid);
+	t[x].rch = merge(t[x].rch, t[y].rch, t[x].mid+1, r);
+	pushUp(x);
+	return x;
+}
