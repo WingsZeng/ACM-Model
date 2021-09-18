@@ -5,12 +5,9 @@ struct Circle {
 	double area() { return PI * r * r; }
 	/* 周长 */
 	double circumFerence() { return 2 * PI * r; }
-	/* 点和圆的关系; 0 圆上, 1 圆内, -1 圆外 */
+	/* 点和圆的关系; 0 圆上, -1 圆内, 1 圆外 */
 	int pointRelation(Point P){
-		double dst = pointDistance(O, P);
-		if (sgn(dst - r) < 0) return 1;
-		else if (!sgn(dst - r)) return 0;
-		return -1;
+		return sgn(pointDistance(O, P) - r);
 	}
 	/* 直线和圆的关系; 返回交点个数 */
 	int lineRelation(Line l){
@@ -63,7 +60,7 @@ struct Circle {
 			v = u = Line{q, q - O.rotleft()};
 			return 1;
 		}
-		double d = O.distance(q), l = r * r / d, h = sqrt(r * r - l * l);
+		double d = pointDistance(O, q), l = r * r / d, h = sqrt(r * r - l * l);
 		u = Line{q, O + ((q-O).trunc(l) + (q-O).rotleft().trunc(h)) - q};
 		v = Line{q, O + ((q-O).trunc(l) + (q-O).rotright().trunc(h)) - q};
 		return 2;
@@ -74,7 +71,7 @@ struct Circle {
 		Point q[5];
 		int len = 0;
 		q[len++] = A;
-		Line l(A, B - A);
+		Line l = {A, B - A};
 		Point p1,p2;
 		if (getLineIntersection(l, q[1], q[2]) == 2) {
 			if(sgn((A - q[1]) * (B - q[1])) < 0) q[len++] = q[1];
@@ -96,22 +93,22 @@ struct Circle {
 };
 /* 三角形外接圆 */
 Circle getOuterCircle(Point A, Point B, Point C) {
-	Line u = Line((A + B) / 2, ((A + B) / 2) + ((B - A).rotleft()));
-	Line v = Line((B + C) / 2, ((B + C) / 2) + ((C - B).rotleft()));
-	Point O = get_line_intersect(u, v);
+	Line u = {(A + B) / 2, (B - A).rotleft()};
+	Line v = {(B + C) / 2, (C - B).rotleft()};
+	Point O = getLineIntersection(u, v);
 	double r = pointDistance(A, O);
 	return Circle{O, r};
 }
 /* 三角形内切圆 */
 Circle getInnerCircle(Point A, Point B, Point C) {
-	double m = atan2(B.y - A.y, B.x - A.x)
+	double m = atan2(B.y - A.y, B.x - A.x);
 	double n = atan2(C.y - A.y, C.x - A.x);
-	Line u = Line{A, Point{cos((n + m) / 2), sin((n + m) / 2)}};
-	m = atan2(A.y - B.y, A.x - B.x), n = atan2(C.y - B.y, c.x - B.x);
-	Line v = Line{B, Point{cos((n+m)/2),sin((n+m)/2)}}
-	Point O = get_line_intersect(u, v);
-	Line AB = Line{A, B - A};
-	r = fabs(AB.pointDistance(O));
+	Line u = {A, Point{cos((n + m) / 2), sin((n + m) / 2)}};
+	m = atan2(A.y - B.y, A.x - B.x), n = atan2(C.y - B.y, C.x - B.x);
+	Line v = {B, Point{cos((n+m)/2),sin((n+m)/2)}};
+	Point O = getLineIntersection(u, v);
+	Line AB = {A, B - A};
+	double r = fabs(AB.pointDistance(O));
 	return Circle{C, r};
 }
 /* 两圆相交面积 */
