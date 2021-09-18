@@ -36,7 +36,7 @@ struct Vec {
 };
 typedef Vec Point;	// 点的记录方式和向量相同
 /* 求两向量的夹角 (无向, 且夹角在[0, PI]之间, 弧度制) */
-double angle(Vec &A, Vec &B) {
+double angle(Vec A, Vec B) {
 	return acos((A * B) / A.length() / B.length());
 }
 /* 两点距离 */
