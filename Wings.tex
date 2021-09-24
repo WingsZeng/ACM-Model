@@ -319,6 +319,22 @@ $$L(x) = \frac{\sum_{i=0}^{n-1}\frac{w_i}{x-x_i}y_i}{\sum_{i=0}^{n-1}\frac{w_i}{
 \subsubsection{cmd批处理脚本}
 \inputminted[linenos,breaklines,tabsize=4,mathescape,texcl]{bat}{codes/check-bat.bat}
 
+\subsection{运行时检查}
+
+运行时检查需要数据. 先生成极限数据, 再运行开了相应编译选项的程序, 输入极限数据.
+
+\begin{spacing}{2}
+\begin{center}
+\begin{tabular}{ |c|c| }
+	\hline
+	检查未定义行为(数组越界, 爆int)	& -fsanitize=undefined		\\
+	\hline
+	检查(复杂)越界					& -fsanitize=address		\\
+	\hline
+\end{tabular}
+\end{center}
+\end{spacing}
+
 \subsection{数学公式}
 
 \subsubsection{几何}
