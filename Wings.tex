@@ -199,7 +199,7 @@
 
 \subsection{多项式}
 
-\subsubsection{拉格朗日插值}
+\subsection{拉格朗日插值}
 
 $$L(x) = \sum_{i=0}^{n-1} y_i \ell_i(x)$$
 $$\ell_i(x) = \prod_{j=0,j\ne i}^{n-1} \frac{(x - x_j)}{(x_i - x_j)} = \frac{(x - x_0) \cdots (x - x_{i-1})(x - x_{i+1}) \cdots (x - x_{n-1})}{(x_i - x_0) \cdots (x_i - x_{i-1})(x_i - x_{i+1}) \cdots (x_i - x_{n-1})}$$
@@ -220,6 +220,29 @@ $$w_i = \frac{1}{\prod_{j \ne i}(x_i - x_j)}$$
 $$L(x) = \frac{\sum_{i=0}^{n-1}\frac{w_i}{x-x_i}y_i}{\sum_{i=0}^{n-1}\frac{w_i}{x-x_i}}$$
 
 \cpp{codes/math/polynomial/lagrange-weight.cpp}
+
+\subsection{FFT}
+
+\cpp{codes/math/polynomial/fft.cpp}
+
+\subsection{多项式乘法}
+
+\cpp{codes/math/polynomial/polynomial-multiply.cpp}
+
+% $$\begin{aligned}
+% A(\omega_{len}^i) &= \sum_{k=0}^{\frac{n}{2}-1} a_{2k} (\omega_{len}^i)^{2k} + \sum_{k=0}^{\frac{n}{2}-1} a_{2k+1} (\omega_{len}^i)^{2k+1} \newline
+% &= \sum_{k=0}^{\frac{n}{2}-1} a_{2k} (\omega_{len}^i)^{2k} + \omega_{len}^i\sum_{k=0}^{\frac{n}{2}-1} a_{2k+1} (\omega_{len}^i)^{2k} \newline
+% &= \sum_{k=0}^{\frac{n}{2}-1} a_{2k} (\omega_{len}^{2i})^k + \omega_{len}^i\sum_{k=0}^{\frac{n}{2}-1} a_{2k+1} (\omega_{len}^{2i})^k \newline
+% &= \sum_{k=0}^{\frac{n}{2}-1} a_{2k} (\omega_{\frac{len}{2}}^{i})^k + \omega_{len}^i\sum_{k=0}^{\frac{n}{2}-1} a_{2k+1} (\omega_{\frac{len}{2}}^{i})^k
+% \end{aligned}$$
+
+% $$\begin{aligned}
+% A(\omega_{len}^{i+\frac{len}{2}}) &= \sum_{k=0}^{\frac{n}{2}-1} a_{2k} (\omega_{len}^{i+\frac{len}{2}})^{2k} + \sum_{k=0}^{\frac{n}{2}-1} a_{2k+1} (\omega_{len}^{i+\frac{len}{2}})^{2k+1} \newline
+% &= \sum_{k=0}^{\frac{n}{2}-1} a_{2k} (\omega_{len}^{i+\frac{len}{2}})^{2k} + \omega_{len}^{i+\frac{len}{2}}\sum_{k=0}^{\frac{n}{2}-1} a_{2k+1} (\omega_{len}^{i+\frac{len}{2}})^{2k} \newline
+% &= \sum_{k=0}^{\frac{n}{2}-1} a_{2k} (\omega_{len}^{2i+len})^k - \omega_{len}^i\sum_{k=0}^{\frac{n}{2}-1} a_{2k+1} (\omega_{len}^{2i+len})^k \newline
+% &= \sum_{k=0}^{\frac{n}{2}-1} a_{2k} (\omega_{\frac{len}{2}}^{i})^k - \omega_{len}^i\sum_{k=0}^{\frac{n}{2}-1} a_{2k+1} (\omega_{\frac{len}{2}}^{i})^k
+% \end{aligned}$$
+
 
 % \section{数论}
 
