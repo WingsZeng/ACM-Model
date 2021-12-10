@@ -53,10 +53,8 @@
 \item \mintinline{c++}{const int MAXM} 为第二维数据最大长度或(抽象)图最大边数
 \item \mintinline{c++}{const int MAXQ} 为最大询问
 \item \mintinline{c++}{#ifdef GDB} 表示GDB调试, 从文件读取数据等
-\item \mintinline{c++}{#ifdef NGCS} 表示输出中间变量调试 (NGCS = Nothing Gold Can Stay)
 \item 若无特殊情况, 数组从下标1开始存储数据
-\item 图论带边权一般以邻接表建图; 否则用向量存邻接点
-\item 网络流邻接表边从下标0开始, 因为要建反边; 否则从1开始
+\item 图论带边权一般以链式前向星建图, 且下标从 0 开始; 否则用向量存邻接点
 \item[]
 \item 为节省篇幅, 代码进行部分压行
 \end{itemize}
@@ -177,6 +175,10 @@
 % \cpp{codes/tree/virtual-tree.cpp}
 
 \section{图论}
+\cpp{codes/graph/edge.cpp}
+
+\subsection{Dijkstra}
+\cpp{codes/graph/dijkstra.cpp}
 
 \subsection[匈牙利]{匈牙利二分图匹配}
 \cpp{codes/graph/hungarian.cpp}
