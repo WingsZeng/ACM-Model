@@ -3,9 +3,11 @@ struct Node {
 	bool operator < (const Node &n) const { return d > n.d; }
 };
 priority_queue<Node> Q;
-void dij() {
+int d[MAXV];
+void dij(int s) {
 	memset(vis, 0, sizeof(vis));
-	for (int i = 1; i <= n; i++) Q.push({i, d[i]});
+	memset(d, INTINF, sizeof(d));
+	Q.push({s, d[s] = 0});
 	while (!Q.empty()) {
 		Node x = Q.top(); Q.pop();
 		int u = x.u;
