@@ -1,10 +1,18 @@
-\documentclass[utf8]{ctexart}
-\usepackage[cache=false]{minted}
+\documentclass{article}
+\usepackage{xeCJK}
+\usepackage{minted}
 \usepackage{geometry}
 \usepackage{graphicx}
-\usepackage{sourcecodepro}
+% \usepackage{sourcecodepro}
 \usepackage{setspace}
 \usepackage{hyperref}
+
+\setmainfont{Ubuntu}
+\setsansfont{Ubuntu}
+\setmonofont{Ubuntu Mono}
+\setCJKmainfont{Noto Sans CJK SC}
+\setCJKsansfont{Noto Sans CJK SC}
+\setCJKmonofont{Noto Sans CJK SC}
 
 \hypersetup{hidelinks,
 	colorlinks=true,
@@ -14,7 +22,7 @@
 }
 
 \newcommand{\cpp}[1]{\inputminted[linenos,breaklines,tabsize=4,mathescape]{c++}{#1}}
-\geometry{a4paper,left=25mm,right=2cm,top=2cm,bottom=1cm}	% 调整页边距, 打印用
+\geometry{a4paper,left=25mm,right=2cm,top=2cm,bottom=2cm}	% 调整页边距, 打印用
 \usemintedstyle{bw}		% 设置minted的高亮风格
 
 \begin{document}
@@ -25,13 +33,12 @@
 
 % 这里搞封面
 \begin{titlepage}
-\newgeometry{}				% 封面页边距不用调
 \maketitle
 \thispagestyle{empty}		% 封面无页数
 \end{titlepage}
 \newpage
 
-\linespread{1} \selectfont 	% 设置行距
+% \linespread{1} \selectfont 	% 设置行距
 
 % 目录
 \setcounter{page}{1}
@@ -168,6 +175,10 @@
 \subsection{点分治}
 \cpp{codes/tree/centroid-decomposition.cpp}
 
+\subsection{倍增LCA}
+\cpp{codes/tree/double-lca.cpp}
+
+
 % \subsection[虚树]{虚树(忘了, 抄了以前的代码)}
 % TODO
 
@@ -251,17 +262,29 @@ $$L(x) = \frac{\sum_{i=0}^{n-1}\frac{w_i}{x-x_i}y_i}{\sum_{i=0}^{n-1}\frac{w_i}{
 % \end{aligned}$$
 
 
-% \section{数论}
+\section{数论}
 
 % \subsection{欧几里得}
 
-% \subsection{拓展欧几里得}
+\subsection{拓展欧几里得}
+求 $ax+by = (a, b)$ 的一组解 $(x_0, y_0)$. 其他解满足: $x = x_0 + k \frac{b}{(a, b)}, y = y_0 - k \frac{a}{(a, b)}$
+\cpp{codes/number-theory/exgcd.cpp}
+
+\subsection{线性逆元}
+\cpp{codes/number-theory/linear-inverse.cpp}
+
+\subsection{欧拉函数}
+\cpp{codes/number-theory/euler-phi.cpp}
 
 % \subsection{质因数分解}
 
-% \subsection{筛素数}
+\subsection{线性筛素数}
+\cpp{codes/number-theory/prime.cpp}
 
-% \section{组合数学}
+\section{组合数学}
+
+\subsection{组合数打表}
+\cpp{codes/combination/combination.cpp}
 
 \section{计算几何}
 
